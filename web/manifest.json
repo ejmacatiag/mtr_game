@@ -1,6 +1,6 @@
 {
-    "name": "endless_runner",
-    "short_name": "endless_runner",
+    "name": "jump_cardo",
+    "short_name": "jump_cardo",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
