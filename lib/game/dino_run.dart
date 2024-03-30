@@ -83,7 +83,7 @@ class DinoRun extends FlameGame with TapDetector, HasCollisionDetection {
         ParallaxImageData('parallax/ground.png'),
       ],
       baseVelocity: Vector2(10, 0),
-      velocityMultiplierDelta: Vector2(1.4, 0),
+      velocityMultiplierDelta: Vector2(2.9, 0),
     );
 
     // Add the parallax as the backdrop.
