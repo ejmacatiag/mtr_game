@@ -47,9 +47,9 @@ class GameOverMenu extends StatelessWidget {
                       selector: (_, playerData) => playerData.currentScore,
                       builder: (_, score, __) {
                         return Text(
-                          'You Score: $score',
+                          'Your Score: $score',
                           style: const TextStyle(
-                              fontSize: 40, color: Colors.white),
+                              fontSize: 25, color: Colors.white),
                         );
                       },
                     ),
@@ -57,7 +57,7 @@ class GameOverMenu extends StatelessWidget {
                       child: const Text(
                         'Restart',
                         style: TextStyle(
-                          fontSize: 30,
+                          fontSize: 20,
                         ),
                       ),
                       onPressed: () {
@@ -73,7 +73,7 @@ class GameOverMenu extends StatelessWidget {
                       child: const Text(
                         'Exit',
                         style: TextStyle(
-                          fontSize: 30,
+                          fontSize: 20,
                         ),
                       ),
                       onPressed: () {
