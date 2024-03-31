@@ -1,9 +1,7 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
-
+import 'package:jump_cardo/game/juan_run.dart';
 import '/widgets/hud.dart';
-import '/game/dino_run.dart';
 import '/widgets/settings_menu.dart';
 
 // This represents the main menu overlay.
@@ -12,7 +10,7 @@ class MainMenu extends StatelessWidget {
   static const id = 'MainMenu';
 
   // Reference to parent game.
-  final DinoRun game;
+  final JuanRun game;
 
   const MainMenu(this.game, {super.key});
 
@@ -38,7 +36,7 @@ class MainMenu extends StatelessWidget {
                   const Text(
                     'Juan Run',
                     style: TextStyle(
-                      fontSize: 50,
+                      fontSize: 40,
                       color: Colors.white,
                     ),
                   ),
@@ -51,7 +49,7 @@ class MainMenu extends StatelessWidget {
                     child: const Text(
                       'Play',
                       style: TextStyle(
-                        fontSize: 30,
+                        fontSize: 20,
                       ),
                     ),
                   ),
@@ -63,7 +61,7 @@ class MainMenu extends StatelessWidget {
                     child: const Text(
                       'Settings',
                       style: TextStyle(
-                        fontSize: 30,
+                        fontSize: 20,
                       ),
                     ),
                   ),

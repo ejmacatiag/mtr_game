@@ -1,9 +1,7 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
+import 'package:jump_cardo/game/juan_run.dart';
 import 'package:provider/provider.dart';
-
-import '/game/dino_run.dart';
 import '/models/settings.dart';
 import '/widgets/main_menu.dart';
 import '/game/audio_manager.dart';
@@ -14,7 +12,7 @@ class SettingsMenu extends StatelessWidget {
   static const id = 'SettingsMenu';
 
   // Reference to parent game.
-  final DinoRun game;
+  final JuanRun game;
 
   const SettingsMenu(this.game, {super.key});
 
@@ -45,7 +43,7 @@ class SettingsMenu extends StatelessWidget {
                           title: const Text(
                             'Music',
                             style: TextStyle(
-                              fontSize: 30,
+                              fontSize: 20,
                               color: Colors.white,
                             ),
                           ),
@@ -70,7 +68,7 @@ class SettingsMenu extends StatelessWidget {
                           title: const Text(
                             'Effects',
                             style: TextStyle(
-                              fontSize: 30,
+                              fontSize: 20,
                               color: Colors.white,
                             ),
                           ),

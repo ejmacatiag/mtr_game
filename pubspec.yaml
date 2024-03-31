@@ -57,9 +57,9 @@ flutter:
   assets:
     - assets/images/
     - assets/images/parallax/
-    - assets/images/AngryPig/
-    - assets/images/Bat/
-    - assets/images/Rino/
+    - assets/images/Kapre/
+    - assets/images/Manananggal/
+    - assets/images/Tiyanak/
     - assets/audio/
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
@@ -71,9 +71,9 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: Audiowide
+    - family: PressStart2P
       fonts:
-        - asset: assets/fonts/Audiowide/Audiowide-Regular.ttf
+        - asset: assets/fonts/Press_Start_2P/PressStart2P-Regular.ttf
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

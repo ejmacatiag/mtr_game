@@ -1,14 +1,12 @@
 import 'dart:math';
-
 import 'package:flame/components.dart';
-
+import 'package:jump_cardo/game/juan_run.dart';
 import '/game/enemy.dart';
-import '/game/dino_run.dart';
 import '/models/enemy_data.dart';
 
 // This class is responsible for spawning random enemies at certain
 // interval of time depending upon players current score.
-class EnemyManager extends Component with HasGameReference<DinoRun> {
+class EnemyManager extends Component with HasGameReference<JuanRun> {
   // A list to hold data for all the enemies.
   final List<EnemyData> _data = [];
 
@@ -60,7 +58,7 @@ class EnemyManager extends Component with HasGameReference<DinoRun> {
       _data.addAll([
         EnemyData(
           // image: game.images.fromCache('AngryPig/Walk (36x30).png'),
-          image: game.images.fromCache('AngryPig/kapre.png'),
+          image: game.images.fromCache('Kapre/kapre.png'),
           nFrames: 16,
           stepTime: 0.1,
           textureSize: Vector2(36, 30),
@@ -69,7 +67,7 @@ class EnemyManager extends Component with HasGameReference<DinoRun> {
         ),
         EnemyData(
           // image: game.images.fromCache('Bat/Flying (46x30).png'),]
-          image: game.images.fromCache('Bat/manananggal.png'),
+          image: game.images.fromCache('Manananggal/manananggal.png'),
           nFrames: 7,
           stepTime: 0.1,
           textureSize: Vector2(46, 30),
@@ -78,7 +76,7 @@ class EnemyManager extends Component with HasGameReference<DinoRun> {
         ),
         EnemyData(
           // image: game.images.fromCache('Rino/Run (52x34).png'),
-          image: game.images.fromCache('Rino/tiyanak.png'),
+          image: game.images.fromCache('Tiyanak/tiyanak.png'),
           nFrames: 6,
           stepTime: 0.09,
           textureSize: Vector2(52, 34),

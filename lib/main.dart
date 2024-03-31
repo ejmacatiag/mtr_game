@@ -3,10 +3,9 @@ import 'package:flutter/foundation.dart';
 import 'package:hive/hive.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
+import 'package:jump_cardo/game/juan_run.dart';
 import 'package:path_provider/path_provider.dart';
-
 import 'widgets/hud.dart';
-import 'game/dino_run.dart';
 import 'models/settings.dart';
 import 'widgets/main_menu.dart';
 import 'models/player_data.dart';
@@ -22,7 +21,7 @@ Future<void> main() async {
 
   // Initializes hive and register the adapters.
   await initHive();
-  runApp(const DinoRunApp());
+  runApp(const JuanRunApp());
 }
 
 // This function will initilize hive with apps documents directory.
@@ -39,16 +38,16 @@ Future<void> initHive() async {
 }
 
 // The main widget for this game.
-class DinoRunApp extends StatelessWidget {
-  const DinoRunApp({super.key});
+class JuanRunApp extends StatelessWidget {
+  const JuanRunApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Dino Run',
+      title: 'Juan Run',
       theme: ThemeData(
-        fontFamily: 'Audiowide',
+        fontFamily: 'PressStart2P',
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
         // Settings up some default theme for elevated buttons.
@@ -60,8 +59,8 @@ class DinoRunApp extends StatelessWidget {
         ),
       ),
       home: Scaffold(
-        body: GameWidget<DinoRun>.controlled(
-          // This will dislpay a loading bar until [DinoRun] completes
+        body: GameWidget<JuanRun>.controlled(
+          // This will dislpay a loading bar until [JuanRun] completes
           // its onLoad method.
           loadingBuilder: (conetxt) => const Center(
             child: SizedBox(
@@ -79,7 +78,7 @@ class DinoRunApp extends StatelessWidget {
           },
           // By default MainMenu overlay will be active.
           initialActiveOverlays: const [MainMenu.id],
-          gameFactory: () => DinoRun(
+          gameFactory: () => JuanRun(
             // Use a fixed resolution camera to avoid manually
             // scaling and handling different screen sizes.
             camera: CameraComponent.withFixedResolution(
