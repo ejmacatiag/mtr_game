@@ -6,8 +6,7 @@ import 'package:hive/hive.dart';
 import 'package:flame/parallax.dart';
 import 'package:flutter/material.dart';
 import 'package:flame/components.dart';
-
-import '/game/dino.dart';
+import 'package:jump_cardo/game/juan.dart';
 import '/widgets/hud.dart';
 import '/models/settings.dart';
 import '/game/audio_manager.dart';
@@ -17,23 +16,15 @@ import '/widgets/pause_menu.dart';
 import '/widgets/game_over_menu.dart';
 
 // This is the main flame game class.
-class DinoRun extends FlameGame with TapDetector, HasCollisionDetection {
-  DinoRun({super.camera});
+class JuanRun extends FlameGame with TapDetector, HasCollisionDetection {
+  JuanRun({super.camera});
 
   // List of all the image assets.
   static const _imageAssets = [
-    // 'DinoSprites - tard.png',
     'juan.png',
-    // 'AngryPig/Walk (36x30).png',
-    'AngryPig/kapre.png',
-    // 'Bat/Flying (46x30).png',
-    'Bat/manananggal.png',
-    // 'Rino/Run (52x34).png',
-    'Rino/tiyanak.png',
-    'parallax/plx-1.png',
-    'parallax/plx-2.png',
-    'parallax/plx-3.png',
-    'parallax/plx-4.png',
+    'Kapre/kapre.png',
+    'Manananggal/manananggal.png',
+    'Tiyanak/tiyanak.png',
     'parallax/plx-5.png',
     'parallax/ground.png',
   ];
@@ -45,7 +36,7 @@ class DinoRun extends FlameGame with TapDetector, HasCollisionDetection {
     'jump14.wav',
   ];
 
-  late Dino _dino;
+  late Juan _juan;
   late Settings settings;
   late PlayerData playerData;
   late EnemyManager _enemyManager;
@@ -79,10 +70,6 @@ class DinoRun extends FlameGame with TapDetector, HasCollisionDetection {
     /// Create a [ParallaxComponent] and add it to game.
     final parallaxBackground = await loadParallaxComponent(
       [
-        // ParallaxImageData('parallax/plx-1.png'),
-        // ParallaxImageData('parallax/plx-2.png'),
-        // ParallaxImageData('parallax/plx-3.png'),
-        // ParallaxImageData('parallax/plx-4.png'),
         ParallaxImageData('parallax/plx-5.png'),
         ParallaxImageData('parallax/ground.png'),
       ],
@@ -94,19 +81,19 @@ class DinoRun extends FlameGame with TapDetector, HasCollisionDetection {
     camera.backdrop.add(parallaxBackground);
   }
 
-  /// This method add the already created [Dino]
+  /// This method add the already created [Juan]
   /// and [EnemyManager] to this game.
   void startGamePlay() {
-    _dino = Dino(images.fromCache('juan.png'), playerData);
+    _juan = Juan(images.fromCache('juan.png'), playerData);
     _enemyManager = EnemyManager();
 
-    world.add(_dino);
+    world.add(_juan);
     world.add(_enemyManager);
   }
 
   // This method remove all the actors from the game.
   void _disconnectActors() {
-    _dino.removeFromParent();
+    _juan.removeFromParent();
     _enemyManager.removeAllEnemies();
     _enemyManager.removeFromParent();
   }
@@ -137,10 +124,10 @@ class DinoRun extends FlameGame with TapDetector, HasCollisionDetection {
   // This will get called for each tap on the screen.
   @override
   void onTapDown(TapDownInfo info) {
-    // Make dino jump only when game is playing.
+    // Make juan jump only when game is playing.
     // When game is in playing state, only Hud will be the active overlay.
     if (overlays.isActive(Hud.id)) {
-      _dino.jump();
+      _juan.jump();
     }
     super.onTapDown(info);
   }
@@ -148,35 +135,35 @@ class DinoRun extends FlameGame with TapDetector, HasCollisionDetection {
   /// This method reads [PlayerData] from the hive box.
   Future<PlayerData> _readPlayerData() async {
     final playerDataBox =
-        await Hive.openBox<PlayerData>('DinoRun.PlayerDataBox');
-    final playerData = playerDataBox.get('DinoRun.PlayerData');
+        await Hive.openBox<PlayerData>('JuanRun.PlayerDataBox');
+    final playerData = playerDataBox.get('JuanRun.PlayerData');
 
     // If data is null, this is probably a fresh launch of the game.
     if (playerData == null) {
       // In such cases store default values in hive.
-      await playerDataBox.put('DinoRun.PlayerData', PlayerData());
+      await playerDataBox.put('JuanRun.PlayerData', PlayerData());
     }
 
     // Now it is safe to return the stored value.
-    return playerDataBox.get('DinoRun.PlayerData')!;
+    return playerDataBox.get('JuanRun.PlayerData')!;
   }
 
   /// This method reads [Settings] from the hive box.
   Future<Settings> _readSettings() async {
-    final settingsBox = await Hive.openBox<Settings>('DinoRun.SettingsBox');
-    final settings = settingsBox.get('DinoRun.Settings');
+    final settingsBox = await Hive.openBox<Settings>('JuanRun.SettingsBox');
+    final settings = settingsBox.get('JuanRun.Settings');
 
     // If data is null, this is probably a fresh launch of the game.
     if (settings == null) {
       // In such cases store default values in hive.
       await settingsBox.put(
-        'DinoRun.Settings',
+        'JuanRun.Settings',
         Settings(bgm: true, sfx: true),
       );
     }
 
     // Now it is safe to return the stored value.
-    return settingsBox.get('DinoRun.Settings')!;
+    return settingsBox.get('JuanRun.Settings')!;
   }
 
   @override

@@ -2,7 +2,7 @@ import '/models/settings.dart';
 import 'package:flame/flame.dart';
 import 'package:flame_audio/flame_audio.dart';
 
-/// This class is the common interface between [DinoRun]
+/// This class is the common interface between [JuanRun]
 /// and [Flame] engine's audio APIs.
 class AudioManager {
   late Settings settings;

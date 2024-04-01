@@ -1,22 +1,20 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
+import 'package:jump_cardo/game/juan_run.dart';
 import 'package:provider/provider.dart';
-
 import '/widgets/hud.dart';
-import '/game/dino_run.dart';
 import '/widgets/main_menu.dart';
 import '/models/player_data.dart';
 import '/game/audio_manager.dart';
 
 // This represents the game over overlay,
-// displayed with dino runs out of lives.
+// displayed with Juan runs out of lives.
 class GameOverMenu extends StatelessWidget {
   // An unique identified for this overlay.
   static const id = 'GameOverMenu';
 
   // Reference to parent game.
-  final DinoRun game;
+  final JuanRun game;
 
   const GameOverMenu(this.game, {super.key});
 
@@ -49,9 +47,9 @@ class GameOverMenu extends StatelessWidget {
                       selector: (_, playerData) => playerData.currentScore,
                       builder: (_, score, __) {
                         return Text(
-                          'You Score: $score',
+                          'Your Score: $score',
                           style: const TextStyle(
-                              fontSize: 40, color: Colors.white),
+                              fontSize: 25, color: Colors.white),
                         );
                       },
                     ),
@@ -59,7 +57,7 @@ class GameOverMenu extends StatelessWidget {
                       child: const Text(
                         'Restart',
                         style: TextStyle(
-                          fontSize: 30,
+                          fontSize: 20,
                         ),
                       ),
                       onPressed: () {
@@ -75,7 +73,7 @@ class GameOverMenu extends StatelessWidget {
                       child: const Text(
                         'Exit',
                         style: TextStyle(
-                          fontSize: 30,
+                          fontSize: 20,
                         ),
                       ),
                       onPressed: () {

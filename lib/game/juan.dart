@@ -1,15 +1,13 @@
 import 'dart:ui';
-
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
-
+import 'package:jump_cardo/game/juan_run.dart';
 import '/game/enemy.dart';
-import '/game/dino_run.dart';
 import '/game/audio_manager.dart';
 import '/models/player_data.dart';
 
-/// This enum represents the animation states of [Dino].
-enum DinoAnimationStates {
+/// This enum represents the animation states of [Juan].
+enum JuanAnimationStates {
   idle,
   run,
   kick,
@@ -17,35 +15,35 @@ enum DinoAnimationStates {
   sprint,
 }
 
-// This represents the dino character of this game.
-class Dino extends SpriteAnimationGroupComponent<DinoAnimationStates>
-    with CollisionCallbacks, HasGameReference<DinoRun> {
+// This represents the juan character of this game.
+class Juan extends SpriteAnimationGroupComponent<JuanAnimationStates>
+    with CollisionCallbacks, HasGameReference<JuanRun> {
   // A map of all the animation states and their corresponding animations.
   static final _animationMap = {
-    DinoAnimationStates.idle: SpriteAnimationData.sequenced(
+    JuanAnimationStates.idle: SpriteAnimationData.sequenced(
       amount: 4,
       stepTime: 0.1,
       textureSize: Vector2.all(24),
     ),
-    DinoAnimationStates.run: SpriteAnimationData.sequenced(
+    JuanAnimationStates.run: SpriteAnimationData.sequenced(
       amount: 6,
       stepTime: 0.1,
       textureSize: Vector2.all(24),
       texturePosition: Vector2((4) * 24, 0),
     ),
-    DinoAnimationStates.kick: SpriteAnimationData.sequenced(
+    JuanAnimationStates.kick: SpriteAnimationData.sequenced(
       amount: 4,
       stepTime: 0.1,
       textureSize: Vector2.all(24),
       texturePosition: Vector2((4 + 6) * 24, 0),
     ),
-    DinoAnimationStates.hit: SpriteAnimationData.sequenced(
+    JuanAnimationStates.hit: SpriteAnimationData.sequenced(
       amount: 3,
       stepTime: 0.1,
       textureSize: Vector2.all(24),
       texturePosition: Vector2((4 + 6 + 4) * 24, 0),
     ),
-    DinoAnimationStates.sprint: SpriteAnimationData.sequenced(
+    JuanAnimationStates.sprint: SpriteAnimationData.sequenced(
       amount: 7,
       stepTime: 0.1,
       textureSize: Vector2.all(24),
@@ -54,10 +52,10 @@ class Dino extends SpriteAnimationGroupComponent<DinoAnimationStates>
   };
 
   // The max distance from top of the screen beyond which
-  // dino should never go. Basically the screen height - ground height
+  // juan should never go. Basically the screen height - ground height
   double yMax = 0.0;
 
-  // Dino's current speed along y-axis.
+  // Juan's current speed along y-axis.
   double speedY = 0.0;
 
   // Controlls how long the hit animations will be played.
@@ -69,7 +67,7 @@ class Dino extends SpriteAnimationGroupComponent<DinoAnimationStates>
 
   bool isHit = false;
 
-  Dino(Image image, this.playerData)
+  Juan(Image image, this.playerData)
       : super.fromFrameData(image, _animationMap);
 
   @override
@@ -78,7 +76,7 @@ class Dino extends SpriteAnimationGroupComponent<DinoAnimationStates>
     // will be called even while restarting the game.
     _reset();
 
-    // Add a hitbox for dino.
+    // Add a hitbox for juan.
     add(
       RectangleHitbox.relative(
         Vector2(0.5, 0.7),
@@ -90,7 +88,7 @@ class Dino extends SpriteAnimationGroupComponent<DinoAnimationStates>
 
     /// Set the callback for [_hitTimer].
     _hitTimer.onTick = () {
-      current = DinoAnimationStates.run;
+      current = JuanAnimationStates.run;
       isHit = false;
     };
 
@@ -105,13 +103,13 @@ class Dino extends SpriteAnimationGroupComponent<DinoAnimationStates>
     // d = s0 + s * t
     y += speedY * dt;
 
-    /// This code makes sure that dino never goes beyond [yMax].
+    /// This code makes sure that juan never goes beyond [yMax].
     if (isOnGround) {
       y = yMax;
       speedY = 0.0;
-      if ((current != DinoAnimationStates.hit) &&
-          (current != DinoAnimationStates.run)) {
-        current = DinoAnimationStates.run;
+      if ((current != JuanAnimationStates.hit) &&
+          (current != JuanAnimationStates.run)) {
+        current = JuanAnimationStates.run;
       }
     }
 
@@ -119,10 +117,10 @@ class Dino extends SpriteAnimationGroupComponent<DinoAnimationStates>
     super.update(dt);
   }
 
-  // Gets called when dino collides with other Collidables.
+  // Gets called when juan collides with other Collidables.
   @override
   void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
-    // Call hit only if other component is an Enemy and dino
+    // Call hit only if other component is an Enemy and juan
     // is not already in hit state.
     if ((other is Enemy) && (!isHit)) {
       hit();
@@ -130,26 +128,26 @@ class Dino extends SpriteAnimationGroupComponent<DinoAnimationStates>
     super.onCollision(intersectionPoints, other);
   }
 
-  // Returns true if dino is on ground.
+  // Returns true if juan is on ground.
   bool get isOnGround => (y >= yMax);
 
-  // Makes the dino jump.
+  // Makes the juan jump.
   void jump() {
-    // Jump only if dino is on ground.
+    // Jump only if juan is on ground.
     if (isOnGround) {
       speedY = -300;
-      current = DinoAnimationStates.idle;
+      current = JuanAnimationStates.idle;
       AudioManager.instance.playSfx('jump14.wav');
     }
   }
 
   // This method changes the animation state to
-  /// [DinoAnimationStates.hit], plays the hit sound
+  /// [JuanAnimationStates.hit], plays the hit sound
   /// effect and reduces the player life by 1.
   void hit() {
     isHit = true;
     AudioManager.instance.playSfx('hurt7.wav');
-    current = DinoAnimationStates.hit;
+    current = JuanAnimationStates.hit;
     _hitTimer.start();
     playerData.lives -= 1;
   }
@@ -163,7 +161,7 @@ class Dino extends SpriteAnimationGroupComponent<DinoAnimationStates>
     anchor = Anchor.bottomLeft;
     position = Vector2(32, game.virtualSize.y - 22);
     size = Vector2.all(24);
-    current = DinoAnimationStates.run;
+    current = JuanAnimationStates.run;
     isHit = false;
     speedY = 0.0;
   }

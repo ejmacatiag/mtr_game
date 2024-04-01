@@ -1,10 +1,8 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
+import 'package:jump_cardo/game/juan_run.dart';
 import 'package:provider/provider.dart';
-
 import '/widgets/hud.dart';
-import '/game/dino_run.dart';
 import '/widgets/main_menu.dart';
 import '/game/audio_manager.dart';
 import '/models/player_data.dart';
@@ -15,7 +13,7 @@ class PauseMenu extends StatelessWidget {
   static const id = 'PauseMenu';
 
   // Reference to parent game.
-  final DinoRun game;
+  final JuanRun game;
 
   const PauseMenu(this.game, {super.key});
 
@@ -48,7 +46,7 @@ class PauseMenu extends StatelessWidget {
                           return Text(
                             'Score: $score',
                             style: const TextStyle(
-                                fontSize: 40, color: Colors.white),
+                                fontSize: 25, color: Colors.white),
                           );
                         },
                       ),
@@ -63,7 +61,7 @@ class PauseMenu extends StatelessWidget {
                       child: const Text(
                         'Resume',
                         style: TextStyle(
-                          fontSize: 30,
+                          fontSize: 20,
                         ),
                       ),
                     ),
@@ -79,7 +77,7 @@ class PauseMenu extends StatelessWidget {
                       child: const Text(
                         'Restart',
                         style: TextStyle(
-                          fontSize: 30,
+                          fontSize: 20,
                         ),
                       ),
                     ),
@@ -94,7 +92,7 @@ class PauseMenu extends StatelessWidget {
                       child: const Text(
                         'Exit',
                         style: TextStyle(
-                          fontSize: 30,
+                          fontSize: 20,
                         ),
                       ),
                     ),

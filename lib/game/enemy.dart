@@ -1,12 +1,11 @@
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
-
-import '/game/dino_run.dart';
+import 'package:jump_cardo/game/juan_run.dart';
 import '/models/enemy_data.dart';
 
 // This represents an enemy in the game world.
 class Enemy extends SpriteAnimationComponent
-    with CollisionCallbacks, HasGameReference<DinoRun> {
+    with CollisionCallbacks, HasGameReference<JuanRun> {
   // The data required for creation of this enemy.
   final EnemyData enemyData;
 
@@ -24,7 +23,7 @@ class Enemy extends SpriteAnimationComponent
   @override
   void onMount() {
     // Reduce the size of enemy as they look too
-    // big compared to the dino.
+    // big compared to juan.
     size *= 0.6;
 
     // Add a hitbox for this enemy.
